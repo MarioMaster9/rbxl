@@ -107,6 +107,8 @@ class DataStream:
     def readInterleavedInt(self, count):
         result = self.readInterleavedUint32(count, self.rotateInt32)
         return result
+    def readInt64Vector(self, count):
+        return readInterleaved(count, self.rotateInt64, 8)
     def readIds(self, count):
         result = self.readInterleavedInt(count)
         for i in range(1, len(result)):
