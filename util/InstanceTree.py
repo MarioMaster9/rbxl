@@ -1,5 +1,5 @@
 import base64
-from data_types import *
+from ..data_types import *
 
 class TreeItem:
     def __init__(self, elem, parent):

@@ -1,6 +1,6 @@
 import math
 from .Vector2 import Vector2
-import data_types.Enum as Enum
+from . import Enum
 
 class Vector3:
     def __init__(self, x, y, z):

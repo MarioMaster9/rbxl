@@ -5,7 +5,7 @@ import zstd as zstd
 from .BinaryTreeItem import BinaryTreeItem
 from .BinaryToken import BinaryToken
 
-from data_types import *
+from ..data_types import *
 
 intConvert = lambda x, a: struct.unpack('<i', x)[0]
 uintConvert = lambda x, a: struct.unpack('<I', x)[0]

@@ -1,5 +1,5 @@
 from .Content import Content
-import data_types.Enum as Enum
+from . import Enum
 
 getText = lambda x: x.text or ''
 
