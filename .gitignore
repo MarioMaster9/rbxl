@@ -1,0 +1,8 @@
+*.poly
+*.rbxl
+*.rbxlx
+scripts/
+embedded/
+out/
+**/__pycache__
+**/*.pyc
