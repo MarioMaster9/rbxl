@@ -264,7 +264,7 @@ class BinaryChunk:
                 for i in range(instCount):
                     values.append(Color3(r[i]/255,g[i]/255,b[i]/255))
             case BinaryToken.INT64:
-                values = stream.readInterleaved(instCount, stream.rotateInt64, 8)
+                values = stream.readInt64Vector(instCount)
             case BinaryToken.SHAREDSTRING:
                 indices = stream.readInterleavedUint32(instCount)
                 for index in indices:
@@ -281,13 +281,11 @@ class BinaryChunk:
                         cframes[i] = None
                 values = cframes
             case BinaryToken.UNIQUEID:
-                def transform(buffer, offset):
-                    random = stream.rotateInt64(buffer, 0)
-                    _time = uintConvert(buffer[8:12], 0)
-                    _index = uintConvert(buffer[12:16], 0)
-                    v = [random, _time, _index]
-                    return v
-                values = stream.readInterleaved(instCount, transform, 16)
+                indexes = stream.readInterleavedUint32(instCount)
+                timestamps = stream.readInterleavedUint32(instCount)
+                rawbits = stream.readInt64Vector(instCount)
+                for i in range(instCount):
+                    values.append([indexes[i], timestamps[i], rawbits[i]])
             case BinaryToken.FONT:
                 for i in range(instCount):
                     family = Content(stream.readString())
