@@ -295,6 +295,17 @@ class BinaryChunk:
                     values.append(FontFace(family, weight, style))
             case BinaryToken.CAPABILITIES:
                 values = stream.readInterleaved(instCount, uint64Convert, 8)
+            case BinaryToken.ASSETCONTENTMAP:
+                for i in range(instCount):
+                    contentMapSize = stream.readUint64()
+                    contentMap = {}
+                    for j in range(contentMapSize):
+                        key = stream.readString()
+                        hasAssetContent = stream.readUint8()
+                        if hasAssetContent & 1:
+                            assetContent = stream.readString()
+                        if hasAssetContent & 2:
+                            data = stream.readString()
             case _:
                 raise NotImplementedError(f'UNSUPPORTED TOKEN: {hex(tokenId)}')
         return values
