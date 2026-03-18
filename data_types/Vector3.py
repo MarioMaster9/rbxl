@@ -29,6 +29,18 @@ class Vector3:
             return Vector3(other * self.x, other * self.y, other * self.z)
         else:
             return Vector3(other.x * self.x, other.y * self.y, other.z * self.z)
+    def __truediv__(self, other):
+        othertype = type(other)
+        if othertype is int or othertype is float:
+            return Vector3(self.x / other, self.y / other, self.z / other)
+        else:
+            return Vector3(self.x / other.x, self.y / other.y, self.z / other.z)
+    def __rtruediv__(self, other):
+        othertype = type(other)
+        if othertype is int or othertype is float:
+            return Vector3(other / self.x, other / self.y, other / self.z)
+        else:
+            return Vector3(other.x / self.x, other.y / self.y, other.z / self.z)
     def add(self, other):
         self.x = self.x + other.x
         self.y = self.y + other.y
