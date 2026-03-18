@@ -11,6 +11,14 @@ class TreeItem:
                 self.setcustom('hasHumanoid', False)
             self.properties = InstanceTree.GetProperties(elem)
             parent.addChild(self)
+    def getdescendants_internal(self, tbl):
+        for child in self.children:
+            tbl.append(child)
+            child.getdescendants_internal(tbl)
+    def getdescendants(self):
+        descendantsTable = []
+        self.getdescendants_internal(descendantsTable)
+        return descendantsTable
     def addChild(self, child):
         self.children.append(child)
         child.setParent(self)
