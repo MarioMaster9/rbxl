@@ -47,18 +47,18 @@ class DataStream:
         except UnicodeDecodeError:
             decoded = stringBytes
         return decoded
-    def readUint8(self, endianness='little'):
-        return int.from_bytes(self.stream.read(1), endianness, signed=False)
-    def readUint16(self, endianness='little'):
-        return int.from_bytes(self.stream.read(2), endianness, signed=False)
-    def readInt16(self, endianness='little'):
-        return int.from_bytes(self.stream.read(2), endianness, signed=True)
+    def readUint8(self):
+        return int.from_bytes(self.stream.read(1), 'little', signed=False)
+    def readUint16(self):
+        return int.from_bytes(self.stream.read(2), 'little', signed=False)
+    def readInt16(self):
+        return int.from_bytes(self.stream.read(2), 'little', signed=True)
     def readUint32(self, endianness='little'):
         return int.from_bytes(self.stream.read(4), endianness, signed=False)
-    def readInt32(self, endianness='little'):
-        return int.from_bytes(self.stream.read(4), endianness, signed=True)
-    def readUint64(self, endianness='little'):
-        return int.from_bytes(self.stream.read(8), endianness, signed=False)
+    def readInt32(self):
+        return int.from_bytes(self.stream.read(4), 'little', signed=True)
+    def readUint64(self):
+        return int.from_bytes(self.stream.read(8), 'little', signed=False)
     def readBoolean(self):
         return self.readByte() == b'\x01'
     def readLengthPrefixedString(self):
