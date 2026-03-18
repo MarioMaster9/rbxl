@@ -13,6 +13,11 @@ class Vector3:
         return iter((self.x, self.y, self.z))
     def __add__(self, other):
         return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
+    def __iadd__(self, other):
+        self.x += other.x
+        self.y += other.y
+        self.z += other.z
+        return self
     def __sub__(self, other):
         return Vector3(self.x - other.x, self.y - other.y, self.z - other.z)
     def __neg__(self):
@@ -35,16 +40,20 @@ class Vector3:
             return Vector3(self.x / other, self.y / other, self.z / other)
         else:
             return Vector3(self.x / other.x, self.y / other.y, self.z / other.z)
+    def __itruediv__(self, other):
+        othertype = type(other)
+        if othertype is int or othertype is float:
+            other = Vector3(other, other, other)
+        self.x /= other.x
+        self.y /= other.y
+        self.z /= other.z
+        return self
     def __rtruediv__(self, other):
         othertype = type(other)
         if othertype is int or othertype is float:
             return Vector3(other / self.x, other / self.y, other / self.z)
         else:
             return Vector3(other.x / self.x, other.y / self.y, other.z / self.z)
-    def add(self, other):
-        self.x = self.x + other.x
-        self.y = self.y + other.y
-        self.z = self.z + other.z
     def dot(self, rkVector):
         return self.x*rkVector.x + self.y*rkVector.y + self.z*rkVector.z
     def magnitude(self):
