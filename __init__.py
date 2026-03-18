@@ -20,5 +20,5 @@ def parse(filename):
         tree = ET.parse(filename)
         xmlRoot = tree.getroot()
         root = InstanceTree.CreateRoot(root)
-        InstanceTree.BuildTree(root, xmlRoot)
+        InstanceTree.BuildTree(xmlRoot, root)
     return root
