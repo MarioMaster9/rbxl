@@ -5,6 +5,7 @@ class TreeItem:
     def __init__(self, elem, parent, rbxl):
         if 'referent' in elem.attrib:
             rbxl.instances[elem.attrib['referent']] = self
+        self.gameObject = None
         self.custom = {}
         self.children = []
         if not parent is None:
