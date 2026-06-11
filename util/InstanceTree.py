@@ -2,7 +2,9 @@ import base64
 from ..data_types import *
 
 class TreeItem:
-    def __init__(self, elem, parent):
+    def __init__(self, elem, parent, rbxl):
+        if 'referent' in elem.attrib:
+            rbxl.instances[elem.attrib['referent']] = self
         self.custom = {}
         self.children = []
         if not parent is None:
@@ -61,6 +63,13 @@ def basicDeserialize_Report(x):
     print(x.tag)
     return x
 
+def referentDeserialize(x):
+    txt = x.text
+    if x.text == "null":
+        return ["REF", None]
+    else:
+        return ["REF", txt]
+
 booleanDeserialize = lambda x: x.text=="true"
 floatDeserialize = lambda x: float(x.text)
 intDeserialize = lambda x: int(x.text)
@@ -84,7 +93,7 @@ xmlHandlers = {
     "NumberSequence":     NumberSequence.FromXML,
     "PhysicalProperties": PhysicalProperties.FromXML,
     "ProtectedString":    getText,
-    "Ref":                basicDeserialize,
+    "Ref":                referentDeserialize,
     "string":             getText,
     "token":              intDeserialize,
     "UDim2":              UDim2.FromXML,
@@ -113,12 +122,12 @@ class InstanceTree:
             properties[elem.attrib['name']] = handler(elem)
         return properties
     @staticmethod
-    def CreateRoot(elem):
-        return TreeItem(elem, None)
+    def CreateRoot(elem, rbxl):
+        return TreeItem(elem, None, rbxl)
     @staticmethod
-    def BuildTree(elem, obj):
+    def BuildTree(elem, obj, rbxl):
         for child in elem:
             if child.tag != 'Item':
                 continue
-            newItem = TreeItem(child, obj)
+            newItem = TreeItem(child, obj, rbxl)
             InstanceTree.BuildTree(child, newItem)

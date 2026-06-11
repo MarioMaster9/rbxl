@@ -32,6 +32,16 @@ class BinaryRBXL:
                 self.chunks.append(chunk)
             for chunk in self.chunks:
                 chunk.uniqueDecode(DataStream(io.BytesIO(chunk.payload)), self)
+    def getRef(self, refObj):
+        if not type(refObj) is list:
+            return None
+        if len(refObj) != 2:
+            return None
+        if refObj[0] != "REF":
+            return None
+        if refObj[1] is None or refObj[1] == self:
+            return None
+        return self.instances[refObj[1]]
     def decodeChunk(self, stream):
         chunk = BinaryChunk(stream)
         return chunk
