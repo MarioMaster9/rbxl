@@ -5,7 +5,7 @@ class RBXLX:
     def __init__(self, filename):
         tree = ET.parse(filename)
         xmlRoot = tree.getroot()
-        self.root = InstanceTree.CreateRoot(xmlRoot)
+        self.root = InstanceTree.CreateRoot(xmlRoot, self)
         self.instances = {}
         InstanceTree.BuildTree(xmlRoot, self.root)
     def getRef(self, refObj):
