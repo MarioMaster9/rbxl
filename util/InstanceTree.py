@@ -130,4 +130,4 @@ class InstanceTree:
             if child.tag != 'Item':
                 continue
             newItem = TreeItem(child, obj, rbxl)
-            InstanceTree.BuildTree(child, newItem)
+            InstanceTree.BuildTree(child, newItem, rbxl)
