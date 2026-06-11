@@ -7,7 +7,7 @@ class RBXLX:
         xmlRoot = tree.getroot()
         self.root = InstanceTree.CreateRoot(xmlRoot, self)
         self.instances = {}
-        InstanceTree.BuildTree(xmlRoot, self.root)
+        InstanceTree.BuildTree(xmlRoot, self.root, self)
     def getRef(self, refObj):
         if not type(refObj) is list:
             return None
