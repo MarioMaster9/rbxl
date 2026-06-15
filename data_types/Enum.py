@@ -171,3 +171,7 @@ class TextYAlignment:
     Top    = 0
     Center = 1
     Bottom = 2
+
+class ResamplerMode:
+    Default   = 0
+    Pixelated = 1
