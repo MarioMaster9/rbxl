@@ -222,8 +222,8 @@ class BinaryChunk:
                         time = stream.readFloat32()
                         value = stream.readFloat32()
                         envelope = stream.readFloat32()
-                        keypoints.append(NumberSequenceKeypoint(time, value))
-                    values.append(NumberSequence(keypoints))
+                        keypoints.append(RbxNumberSequenceKeypoint(time, value))
+                    values.append(RbxNumberSequence(keypoints))
             case BinaryToken.COLORSEQUENCE:
                 for i in range(instCount):
                     length = stream.readUint32()
@@ -232,13 +232,13 @@ class BinaryChunk:
                         time = stream.readFloat32()
                         color = Color3(stream.readFloat32(), stream.readFloat32(), stream.readFloat32())
                         envelope = stream.readFloat32()
-                        keypoints.append(ColorSequenceKeypoint(time, color))
-                    values.append(ColorSequence(keypoints))
+                        keypoints.append(RbxColorSequenceKeypoint(time, color))
+                    values.append(RbxColorSequence(keypoints))
             case BinaryToken.NUMBERRANGE:
                 for i in range(instCount):
                     _min = stream.readFloat32()
                     _max = stream.readFloat32()
-                    values.append(NumberRange(_min, _max))
+                    values.append(RbxNumberRange(_min, _max))
             case BinaryToken.RECT:
                 rectMin = self.readTyped(BinaryToken.VECTOR2, stream, instCount)
                 rectMax = self.readTyped(BinaryToken.VECTOR2, stream, instCount)
