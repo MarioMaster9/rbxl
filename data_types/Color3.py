@@ -8,6 +8,10 @@ class Color3:
         self.r = r
         self.g = g
         self.b = b
+    def copy(self):
+        return Color3(self.r, self.g, self.b)
+    def __iter__(self):
+        return iter((self.r, self.g, self.b))
     def __eq__(self, rkVector):
         return self.r == rkVector.r and self.g == rkVector.g and self.b == rkVector.b
     def __ne__(self, rkVector):
